@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import * as path from 'path';
 
 (async () => {
     // call the config file to parse variables in to nodejs process environment

@@ -1,4 +1,5 @@
 import * as path from 'path';
+// dev 模式 按照实际开发修改以下内容
 export default () => ({
     port: 8080,
     sql: {
@@ -9,8 +10,6 @@ export default () => ({
         password: '123456',
         database: 'nestjs_doc',
         synchronize: true,
-        autoLoadEntities: true,
-        entities: [path.join(__dirname, '**/*.entity{ .ts,.js}')], // TODO: 获取所有 entity
     },
     swagger: {
         enable: true,
