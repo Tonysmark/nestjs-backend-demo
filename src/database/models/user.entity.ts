@@ -4,15 +4,16 @@ import {
     Column,
     PrimaryGeneratedColumn,
     Unique,
-    ObjectID,
+    CreateDateColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 @Entity()
 @Unique(['username', 'email'])
 export class User {
-    @PrimaryGeneratedColumn()
-    id: ObjectID;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({ type: 'varchar', length: 64 })
     username: string;
@@ -27,12 +28,13 @@ export class User {
     @Column({ type: 'varchar', length: 100 })
     email: string;
 
-    @Column({ type: 'datetime' })
+    @CreateDateColumn()
     create_time: Date;
 
-    @Column({ type: 'datetime' })
+    @UpdateDateColumn()
     update_time: Date;
 
+    // 假删除
     @Exclude()
     @Column({ type: 'tinyint', default: false })
     is_deleted: boolean;

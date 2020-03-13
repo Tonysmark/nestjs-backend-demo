@@ -1,4 +1,3 @@
-import * as path from 'path';
 // dev 模式 按照实际开发修改以下内容
 export default () => ({
     port: 8080,

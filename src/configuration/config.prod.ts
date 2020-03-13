@@ -1,5 +1,5 @@
 // 生产环境，敏感信息放在 process.env 对象中
-import * as path from 'path';
+
 export default () => ({
     port: 8080,
     sql: {
