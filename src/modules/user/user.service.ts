@@ -8,16 +8,10 @@ import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectRepository(UserRepository)
-        private userRepository: UserRepository,
-    ) {}
+    constructor(@InjectRepository(UserRepository) private userRepository: UserRepository) {}
 
     async createUser({ password, ...credential }) {
         const hash = await HashCode.encrypt(password);
-        return this.userRepository.createUser({
-            password: hash,
-            ...credential,
-        } as UserBase);
+        return this.userRepository.createUser({ password: hash, ...credential } as UserBase);
     }
 }

@@ -1,12 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    Unique,
-    CreateDateColumn,
-    UpdateDateColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 @Entity()
