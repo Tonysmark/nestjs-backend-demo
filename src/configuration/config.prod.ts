@@ -15,7 +15,7 @@ export default () => ({
         enable: false,
     },
     jwt: {
-        secret: 'secretKey',
+        secret: 'this key should be in the environment',
         expiresIn: '1d',
     },
 });

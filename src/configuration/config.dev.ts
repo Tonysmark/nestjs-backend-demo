@@ -15,7 +15,7 @@ export default () => ({
         path: 'swagger',
     },
     jwt: {
-        secret: 'secretKey',
+        secret: 'key in the development is use less',
         expiresIn: '1d',
     },
 });
