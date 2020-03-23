@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Entity, Column, PrimaryGeneratedColumn, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    Unique,
+    CreateDateColumn,
+    UpdateDateColumn,
+    BaseEntity,
+} from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 @Entity()
@@ -31,9 +39,4 @@ export class User {
     @Exclude()
     @Column({ type: 'tinyint', default: false })
     is_deleted: boolean;
-
-    constructor() {
-        this.create_time = new Date();
-        this.update_time = new Date();
-    }
 }

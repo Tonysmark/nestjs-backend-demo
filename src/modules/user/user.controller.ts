@@ -1,12 +1,13 @@
-import { Controller, Post, Body, Get, UseGuards, Request, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-import { UserBase } from 'src/dto/user/user.base';
-import { UserService } from './user.service';
-import { SigninRequest } from 'src/dto/auth/signin.request';
-import { of } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
+import { Controller, Post, Body, Get, UseGuards, Request, Param, Patch, Put } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
+
+import { UserBase } from 'src/dto/user/user.base';
+import { SigninRequest } from 'src/dto/auth/signin.request';
+
+import { AuthService } from '../auth/auth.service';
+
+import { UserService } from './user.service';
 
 // 登录 查无此人 => 返回用户不存在错误
 @ApiTags('用户')
@@ -26,17 +27,22 @@ export class UserController {
         return this.userService.validateUser(user);
     }
 
+    @ApiOperation({ summary: '更新用户信息', parameters: [{ in: 'path', name: 'id' }] })
+    @Put(':id')
+    updateUser(@Param() id: string, @Body() user: UserBase) {
+        // 测试一下更改用户名， 后期可以扩展这里
+        return this.userService.updateUser(id, user);
+    }
+
     @ApiOperation({ summary: '获取所有用户' })
     @Get()
     allUsers() {
-        return of([]);
+        return this.userService.getAllUser();
     }
 
     @ApiOperation({ summary: '获取某一用户' })
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
     @Get(':username')
-    currentUser(@Param('username') username: string, @Request() req) {
-        return this.userService.test(req.user);
+    currentUser(@Param('username') username: string) {
+        return true;
     }
 }

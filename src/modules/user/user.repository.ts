@@ -1,4 +1,4 @@
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 
 import { Repository, EntityRepository } from 'typeorm';
 
@@ -24,5 +24,22 @@ export class UserRepository extends Repository<User> {
         } catch (error) {
             throw new ConflictException('用户已经存在');
         }
+    }
+
+    async findUserByUniKey(identifier: { username?: string; email?: string; id?: string }): Promise<User> {
+        const user = await this.createQueryBuilder()
+            .where('user.username', { username: identifier['username'] })
+            .orWhere('user.email', { email: identifier['email'] })
+            .orWhere('user.id', { id: identifier['id'] })
+            .getOne();
+        if (user) {
+            return user;
+        } else {
+            throw new NotFoundException('用户不存在');
+        }
+    }
+
+    async updateUser(id, partial) {
+        return await this.update(id, partial);
     }
 }
