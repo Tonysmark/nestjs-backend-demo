@@ -22,18 +22,14 @@ export class UserService {
     }
 
     async validateUser({ username, password }) {
-        // => 用户不存在， 用户存在但是密码错误， 用户存在但是没有授权
-        // TODO 这里肯定还能改
+        // 1. repository 负责用户是否存在，如果用户不存在会抛出 404
+        // 2. 根据 compare 计算出密码是否正确，如果不正确抛出 401 未授权
         const user = await this.userRepository.findUserByUniKey({ username });
-        if (user) {
-            if (await HashCode.compare(password, user.password)) {
-                Logger.log(`User: ${user.username} is verified`, 'UserService');
-                return await this.authService.tokenGenerator(user);
-            } else {
-                throw new UnauthorizedException('密码错误');
-            }
+        if (await HashCode.compare(password, user.password)) {
+            Logger.log(`User: ${user.username} is verified`, 'UserService');
+            return await this.authService.tokenGenerator(user);
         } else {
-            throw new NotFoundException('用户不存在');
+            throw new UnauthorizedException('密码错误');
         }
     }
 

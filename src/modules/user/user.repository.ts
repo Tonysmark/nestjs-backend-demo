@@ -28,9 +28,9 @@ export class UserRepository extends Repository<User> {
 
     async findUserByUniKey(identifier: { username?: string; email?: string; id?: string }): Promise<User> {
         const user = await this.createQueryBuilder()
-            .where('user.username', { username: identifier['username'] })
-            .orWhere('user.email', { email: identifier['email'] })
-            .orWhere('user.id', { id: identifier['id'] })
+            .where('user.username=:username', { username: identifier['username'] })
+            .orWhere('user.email=:email', { email: identifier['email'] })
+            .orWhere('user.id=:id', { id: identifier['id'] })
             .getOne();
         if (user) {
             return user;
