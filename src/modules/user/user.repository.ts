@@ -40,6 +40,7 @@ export class UserRepository extends Repository<User> {
     }
 
     async updateUser(id, partial) {
+        // 用户数据一般不会是单一的一个表去存，所以这里暂时不去考录多表情况
         return await this.update(id, partial);
     }
 }

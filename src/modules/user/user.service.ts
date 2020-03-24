@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { UserBase } from 'src/dto/user/user.base';
@@ -11,7 +11,6 @@ import { UserRepository } from './user.repository';
 @Injectable()
 export class UserService {
     constructor(
-        /* 注入啥  叫啥  啥类型 */
         @InjectRepository(UserRepository) private userRepository: UserRepository,
         private readonly authService: AuthService,
     ) {}

@@ -27,22 +27,21 @@ export class UserController {
         return this.userService.validateUser(user);
     }
 
-    @ApiOperation({ summary: '更新用户信息', parameters: [{ in: 'path', name: 'id' }] })
+    @ApiOperation({ summary: '修改用户信息', parameters: [{ in: 'path', name: 'id' }] })
     @Put(':id')
     updateUser(@Param() id: string, @Body() user: UserBase) {
-        // 测试一下更改用户名， 后期可以扩展这里
         return this.userService.updateUser(id, user);
     }
 
-    @ApiOperation({ summary: '获取所有用户' })
-    @Get()
-    allUsers() {
-        return this.userService.getAllUser();
-    }
+    // @ApiOperation({ summary: '获取所有用户' })
+    // @Get()
+    // allUsers() {
+    //     return this.userService.getAllUser();
+    // }
 
-    @ApiOperation({ summary: '获取某一用户' })
-    @Get(':username')
-    currentUser(@Param('username') username: string) {
-        return true;
-    }
+    // @ApiOperation({ summary: '获取某一用户' })
+    // @Get(':username')
+    // currentUser(@Param('username') username: string) {
+    //     return true;
+    // }
 }

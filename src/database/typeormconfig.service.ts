@@ -15,7 +15,6 @@ export class TypeormConfigService implements TypeOrmOptionsFactory {
             database: this.configService.get('sql.database'),
             synchronize: this.configService.get('sql.synchronize'),
             entities,
-            logging: true, // FIXME 临时放在这里
         } as TypeOrmModuleOptions;
     }
 }

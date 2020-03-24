@@ -8,6 +8,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
     // call the config file to parse variables in to nodejs process environment
     const app = await NestFactory.create(AppModule, { cors: true });
     const configService = app.get(ConfigService);
+
+    // Global Settings
     app.setGlobalPrefix('api/v1');
 
     // set port
@@ -26,6 +28,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
         SwaggerModule.setup(path, app, document);
         Logger.log('Swagger UI is initialized', 'Swagger');
     }
+
     // start
     await app.listen(port);
     Logger.log(`Service is running at ${port}`, 'Bootstrap');
